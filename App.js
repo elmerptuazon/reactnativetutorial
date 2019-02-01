@@ -46,11 +46,20 @@ export default class App extends Component {
                 uri: 'https://vignette.wikia.nocookie.net/creepypasta/images/e/e2/Anime-Girl-With-Silver-Hair-And-Purple-Eyes-HD-Wallpaper.jpg/revision/latest?cb=20140120061808'
             };
     return (
-      <View style={styles.container}>
-        <Image source={pic} style={{width:300, height:250}} />
-        <Text style={[styles.welcome, this.state.customStyles]}>Welcome Elmer to React Native!</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+        <View style={styles.container}>
+            <View style={styles.half1}>
+                <Text style={styles.welcome}> Title Here</Text>
+            </View>
+            <View style={styles.half2}>
+                <Text style={styles.welcome}> NavBar Here</Text>
+            </View>
+            <View style={styles.half3}>
+                <Text style={{fontSize:20, textAlign:'center',margin:10, color:'white'}}> Content Title</Text>
+            </View>
+            <Image source={pic} style={{flexGrow:1,alignItems:'center',width:null, height:null}} />
+            <Text style={[styles.welcome, this.state.customStyles]}>Welcome Elmer to React Native!</Text>
+            <Text style={styles.instructions}>{instructions}</Text>
+        </View>
     );
   }
 }
@@ -59,18 +68,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    color: 'blue'
+    color: 'black'
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
+  half1: {
+    flex: 1,
+    backgroundColor: 'green'
+  },
+  half2: {
+    flex: 1,
+    backgroundColor: 'blue'
+  },
+  half3: {
+    flex: 1,
+    backgroundColor: 'pink'
+  }
 });
