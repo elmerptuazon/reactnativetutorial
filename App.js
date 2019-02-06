@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, TextInput} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,10 +20,13 @@ const instructions = Platform.select({
 export default class App extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+        inputText: "**Elmer"
+    };
     this.state.customStyles = {
         color: 'red'
     };
+    this.handleChangeText = this.handleChangeText.bind(this)
 
     setInterval(() => {
         if(this.state.customStyles.color == 'red') {
@@ -41,24 +44,28 @@ export default class App extends Component {
     }, 1000);
   }
 
+  handleChangeText(newText) {
+    this.setState({
+        inputText: newText
+    })
+  }
+
   render() {
     const pic = {
                 uri: 'https://vignette.wikia.nocookie.net/creepypasta/images/e/e2/Anime-Girl-With-Silver-Hair-And-Purple-Eyes-HD-Wallpaper.jpg/revision/latest?cb=20140120061808'
             };
     return (
-        <View style={styles.container}>
-            <View style={styles.half1}>
-                <Text style={styles.welcome}> Title Here</Text>
+        <View>
+            <View style={styles.container}>
+                <Text style={[styles.welcome, this.state.customStyles]}>Welcome {this.state.inputText} to React Native!</Text>
             </View>
-            <View style={styles.half2}>
-                <Text style={styles.welcome}> NavBar Here</Text>
-            </View>
-            <View style={styles.half3}>
-                <Text style={{fontSize:20, textAlign:'center',margin:10, color:'white'}}> Content Title</Text>
+            <View style={styles.containerBody}>
+                <Text>Username</Text>
+                <TextInput defaultValue={this.state.inputText} onChangeText={this.handleChangeText}/>
+                <Text>Password</Text>
+                <TextInput defaultValue={this.state.inputText} onChangeText={this.handleChangeText}/>
             </View>
             <Image source={pic} style={{flexGrow:1,alignItems:'center',width:null, height:null}} />
-            <Text style={[styles.welcome, this.state.customStyles]}>Welcome Elmer to React Native!</Text>
-            <Text style={styles.instructions}>{instructions}</Text>
         </View>
     );
   }
@@ -68,29 +75,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF'
+    padding: 20
   },
+  containerBody: {
+      justifyContent: 'center',
+      padding: 20
+    },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
     color: 'black'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  half1: {
-    flex: 1,
-    backgroundColor: 'green'
-  },
-  half2: {
-    flex: 1,
-    backgroundColor: 'blue'
-  },
-  half3: {
-    flex: 1,
-    backgroundColor: 'pink'
-  }
 });
