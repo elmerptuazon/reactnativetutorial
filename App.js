@@ -8,7 +8,9 @@
  */
 
 import React, {Component} from 'react';
-import {Alert, Platform, StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
+import {Alert, Platform, ActivityIndicator, ScrollView, StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import NavigationBar from 'react-native-navbar';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,7 +24,8 @@ export default class App extends Component {
     super();
     this.state = {
         username: "Username",
-        password: ""
+        password: "",
+        loading: false
     };
     this.state.customStyles = {
         color: 'red'
@@ -60,33 +63,53 @@ export default class App extends Component {
     }
 
     handleButtonPressed() {
-        Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
-            [
-            {text: 'Cancel', onPress: () => console.log('Cancelled')},
-            {text: 'OK', onPress: () => console.log('Ok Pressed')}
-            ],
-            {cancelable: true}
-        )
+        this.setState({
+            loading: true
+        })
+        setTimeout(() => {
+            Alert.alert(
+                        'Alert Title',
+                        'My Alert Msg',
+                        [
+                        {text: 'Cancel', onPress: () => console.log('Cancelled')},
+                        {text: 'OK', onPress: () => console.log('Ok Pressed')}
+                        ],
+                        {cancelable: true}
+                    )
+        }, 5000)
     }
   render() {
     const pic = {
                 uri: 'https://vignette.wikia.nocookie.net/creepypasta/images/e/e2/Anime-Girl-With-Silver-Hair-And-Purple-Eyes-HD-Wallpaper.jpg/revision/latest?cb=20140120061808'
             };
+    const rightButtonConfig = {
+      title: 'Next',
+      handler: () => alert('Next Page'),
+    };
     return (
-        <View>
-            <View style={styles.container}>
+        <View style={styles.container}>
+            <View>
+                <NavigationBar title={{title:'NavBar Title'}} style={{color:'white', backgroundColor:'blue'}} rightButton={rightButtonConfig}/>
                 <Text style={[styles.welcome, this.state.customStyles]}>Welcome {this.state.username} to React Native!</Text>
             </View>
+            <ScrollView>
             <View style={styles.containerBody}>
                 <Text>Username</Text>
                 <TextInput defaultValue={this.state.username} onChangeText={this.handleUsernameChangeText}/>
                 <Text>Password</Text>
                 <TextInput defaultValue={this.state.password} onChangeText={this.handlePasswordChangeText}/>
                 <Button title={"Submit"} onPress={this.handleButtonPressed} />
+                <ActivityIndicator size="large" color="#0000ff" />
+                <Text>{"\n"}</Text>
+                <Icon.Button name="facebook" backgroundColor="#3b5998">Login with FB</Icon.Button>
+                <Image source={pic} style={{alignItems:'center',margin:20, width:100, height:100, borderRadius: 40, overflow:'hidden' }}  /><Text style={{width:100, height:100, fontWeight: 'italic', fontSize:20,}}>Image Content</Text>
+                <Image source={pic} style={{alignItems:'center',margin:20, width:100, height:100, borderRadius: 40, overflow:'hidden' }} /><Text style={{width:100, height:100, fontWeight: 'italic', fontSize:20,}}>Image Content</Text>
+                <Image source={pic} style={{alignItems:'center',margin:20, width:100, height:100, borderRadius: 40, overflow:'hidden' }} /><Text style={{width:100, height:100, fontWeight: 'italic', fontSize:20,}}>Image Content</Text>
+                <Image source={pic} style={{alignItems:'center',margin:20, width:100, height:100, borderRadius: 40, overflow:'hidden' }} /><Text style={{width:100, height:100, fontWeight: 'italic', fontSize:20,}}>Image Content</Text>
+
             </View>
-            <Image source={pic} style={{alignItems:'center',margin:20, width:100, height:150}} />
+            </ScrollView>
+            <View style={{position: 'absolute', backgroundColor:'blue', alignItems:'center', left: 0, right: 0, bottom: 0}}><Image source={pic} style={{margin:5, width:50, height:50, borderRadius: 40 }} /><Text style={{color:'white', fontWeight: 'bold', fontSize:10,}}>My fixed footer</Text></View>
         </View>
     );
   }
@@ -95,17 +118,25 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 20
   },
   containerBody: {
-      justifyContent: 'center',
-      padding: 20
+    justifyContent: 'center',
+    padding: 20
     },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
-    color: 'black'
+    color: 'black',
+    backgroundColor: 'pink'
   },
+    activityIndicatorWrapper: {
+      backgroundColor: '#FFFFFF',
+      height: 100,
+      width: 100,
+      borderRadius: 10,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      overflow:'hidden'
+    }
 });
