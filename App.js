@@ -10,21 +10,13 @@
 import React, {Component} from 'react';
 import {Alert, Platform, ActivityIndicator, ScrollView, StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import NavigationBar from 'react-native-navbar';
-import { StackNavigator } from 'react-navigation';
-import AnotherApp from './AnotherApp';
+import { createAppContainer, createDrawerNavigator } from 'react-navigation';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
     'Hello World,\n',
 });
-
-const AnotherPage = StackNavigator({
-        Home: {
-            screen: AnotherApp
-        }
-    });
 
 
 export default class App extends Component {
@@ -105,9 +97,8 @@ export default class App extends Component {
     return (
         <View style={styles.container}>
             <View>
-                <NavigationBar title={{title:'NavBar Title'}} style={{ backgroundColor:'blue'}} rightButton={rightButtonConfig}/>
+
                 <Text style={[styles.welcome, this.state.customStyles]}>Welcome {this.state.username} to React Native!</Text>
-                <AnotherPage />
             </View>
             <ScrollView>
             <View style={styles.containerBody}>
@@ -126,11 +117,13 @@ export default class App extends Component {
 
             </View>
             </ScrollView>
-            <View style={{position: 'absolute', backgroundColor:'blue', alignItems:'center', left: 0, right: 0, bottom: 0}}><Image source={pic} style={{margin:5, width:50, height:50, borderRadius: 40 }} /><Text style={{color:'white', fontWeight: 'bold', fontSize:10,}}>My fixed footer</Text></View>
+            <AppContainer />
+
         </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
