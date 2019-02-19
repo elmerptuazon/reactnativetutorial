@@ -10,7 +10,7 @@
 import React, {Component} from 'react';
 import {Alert, Platform, ActivityIndicator, ScrollView, StyleSheet, Text, View, Image, TextInput, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { createAppContainer, createDrawerNavigator } from 'react-navigation';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -85,6 +85,19 @@ export default class App extends Component {
 
         }, 5000)
     }
+
+    componentWillMount() {
+
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
   render() {
     const pic = {
                 uri: 'https://vignette.wikia.nocookie.net/creepypasta/images/e/e2/Anime-Girl-With-Silver-Hair-And-Purple-Eyes-HD-Wallpaper.jpg/revision/latest?cb=20140120061808'
@@ -117,8 +130,6 @@ export default class App extends Component {
 
             </View>
             </ScrollView>
-            <AppContainer />
-
         </View>
     );
   }
