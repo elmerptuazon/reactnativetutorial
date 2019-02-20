@@ -3,9 +3,14 @@ import {Alert, Animated, Platform, ActivityIndicator, ScrollView, StyleSheet, Te
 import { createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import App from './App';
+import SplashScreen from 'react-native-splash-screen';
 
 
 export default class MainApp extends Component {
+
+    componentDidMount() {
+        SplashScreen.hide();
+    }
 
     render() {
         return (
@@ -14,10 +19,22 @@ export default class MainApp extends Component {
     }
 }
 
+class IntroImage extends Component {
+    render() {
+        return (
+            <View>
+                <Text>Second Page Here</Text>
+            </View>
+        );
+    }
+}
+
 class AnotherApp extends Component {
     render() {
         return (
-            <Text>Second Page Here</Text>
+            <View>
+                <Text>Second Page Here</Text>
+            </View>
         );
     }
 }
