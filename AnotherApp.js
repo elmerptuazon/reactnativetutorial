@@ -63,8 +63,8 @@ class ChooseDate extends Component {
         subColor: '#f0f0f0'
       };
       return (
-        <View>
-          <Button title="Open Calendar" onPress={this.openCalendar} />
+        <View style={{alignSelf: 'center'}}>
+          <Button adjustsFontSizeToFit={true} title="Open Calendar" onPress={this.openCalendar} />
           <Calendar
             i18n="en"
             ref={(calendar) => {this.calendar = calendar;}}
@@ -78,6 +78,12 @@ class ChooseDate extends Component {
             onConfirm={this.confirmDate} />
         </View>
       );
+    }
+}
+
+class ShowDatePicker extends Component {
+    render() {
+        return <ChooseDate />;
     }
 }
 
@@ -111,7 +117,7 @@ const AppDrawerNavigator = createDrawerNavigator(
     {
         Home: AnotherApp,
         Notification: ThirdApp,
-        "Pick Date": ChooseDate,
+        "Pick Date": ShowDatePicker,
         Content: FourthApp
     },
     {
