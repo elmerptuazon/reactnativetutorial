@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import App from './App';
 import SplashScreen from 'react-native-splash-screen';
 import Calendar from 'react-native-calendar-select';
+import AwesomeButton from 'react-native-really-awesome-button';
 
 
 export default class MainApp extends Component {
@@ -82,8 +83,48 @@ class ChooseDate extends Component {
 }
 
 class ShowDatePicker extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            progressText: "AwesoneButton"
+        }
+
+        this.handleProgressCompletion = this.handleProgressCompletion.bind(this)
+    }
+
+    handleProgressCompletion() {
+
+        Alert.alert(
+            'Alert Title',
+            'My Alert Msg',
+            [
+                {text: 'Cancel', onPress: () => console.log('Cancelled')},
+                {text: 'OK', onPress: () => console.log('Ok Pressed')}
+            ],
+            {cancelable: true}
+        )
+
+    }
+
+
     render() {
-        return <ChooseDate />;
+        return (
+        <View>
+            <ChooseDate />
+            <AwesomeButton
+            progress
+            onPress={next => {
+                setTimeout(() => {
+                    this.handleProgressCompletion
+                    action('clicked')
+                    next()
+                }, 3000)
+            }}>
+            {this.state.progressText}
+            </AwesomeButton>
+        </View>
+        );
     }
 }
 
