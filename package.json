@@ -9,6 +9,7 @@
   "dependencies": {
     "moment": "^2.24.0",
     "react": "16.6.3",
+    "react-awesome-button": "^6.0.0",
     "react-native": "^0.58.5",
     "react-native-animatable": "^1.3.1",
     "react-native-calendar-select": "^0.1.2",
@@ -16,6 +17,7 @@
     "react-native-mask-loader": "0.0.3",
     "react-native-navbar": "^2.1.0",
     "react-native-really-awesome-button": "^1.3.1",
+    "react-native-simple-dialogs": "^1.1.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.2.3"

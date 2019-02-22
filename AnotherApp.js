@@ -5,7 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import App from './App';
 import SplashScreen from 'react-native-splash-screen';
 import Calendar from 'react-native-calendar-select';
-import AwesomeButton from 'react-native-really-awesome-button';
+import { ProgressDialog } from 'react-native-simple-dialogs';
+import AwesomeButtonCartman from 'react-native-really-awesome-button/src/themes/cartman';
+
 
 
 export default class MainApp extends Component {
@@ -87,23 +89,33 @@ class ShowDatePicker extends Component {
     constructor() {
         super()
         this.state = {
-            progressText: "AwesoneButton"
+            progressText: "AwesomeButton",
+            isProgressDialog: false
         }
 
         this.handleProgressCompletion = this.handleProgressCompletion.bind(this)
     }
 
     handleProgressCompletion() {
+        this.setState({
+            isProgressDialog: true
+        })
+        setTimeout(() => {
+            this.setState({
+                isProgressDialog: false
+            })
 
-        Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
-            [
+            Alert.alert(
+                'Success Alert',
+                'Success Message',
+                [
                 {text: 'Cancel', onPress: () => console.log('Cancelled')},
                 {text: 'OK', onPress: () => console.log('Ok Pressed')}
-            ],
-            {cancelable: true}
-        )
+                ],
+                {cancelable: false}
+            )
+        }, 2000)
+
 
     }
 
@@ -112,17 +124,8 @@ class ShowDatePicker extends Component {
         return (
         <View>
             <ChooseDate />
-            <AwesomeButton
-            progress
-            onPress={next => {
-                setTimeout(() => {
-                    this.handleProgressCompletion
-                    action('clicked')
-                    next()
-                }, 3000)
-            }}>
-            {this.state.progressText}
-            </AwesomeButton>
+            <AwesomeButtonCartman type="secondary" onPress={this.handleProgressCompletion}>Cartman Button</AwesomeButtonCartman>
+            <ProgressDialog title="Progress Title" message="Message here" visible={this.state.isProgressDialog} />
         </View>
         );
     }
